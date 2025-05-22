@@ -1,7 +1,7 @@
 HTML Banner Editor
 This project is a dynamic web-based tool for creating and customizing HTML banners. It features a visual drag-and-drop interface, real-time styling controls, and the ability to export the final design as a PNG image.
 
-Project Link: banner-generator-ruby.vercel.app
+Project Link: [banner-generator-ruby.vercel.app](https://banner-generator-ruby.vercel.app/)
 
 Features
 Banner Customization: Adjust dimensions, border radius, and background image (upload, position).
