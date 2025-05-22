@@ -1,0 +1,687 @@
+/* Adicione estas variáveis para clareza e fácil ajuste */
+:root {
+    --menu-width: 300px;
+    --gap: 20px; /* Espaçamento entre o menu e o conteúdo */
+}
+
+/* Estilos globais para o corpo da página */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Impede a rolagem da página principal */
+}
+
+/* Container que organiza o menu fixo e o conteúdo principal */
+.page-container {
+    display: flex;
+    height: 100vh; /* Ocupa a altura total da viewport */
+}
+
+/* Estilos para o menu de configurações (o "cubo preto") */
+.black-menu {
+    width: var(--menu-width);
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 0; /* Remove border-radius para o menu lateral */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra à direita */
+    position: fixed; /* Fixa o menu na tela */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Ocupa a altura total da tela */
+    overflow-y: auto; /* Adiciona scroll vertical se o conteúdo exceder */
+    box-sizing: border-box; /* Garante que padding não aumente a largura */
+    z-index: 100; /* AUMENTAR O Z-INDEX PARA GARANTIR QUE FIQUE ACIMA DE TUDO */
+}
+
+.black-menu h2 {
+    margin-top: 0;
+    color: #3498db;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+/* Estilos para a navegação das abas */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #4a627a;
+    padding-bottom: 5px;
+}
+
+.tab-button {
+    background-color: #3b5066; /* Fundo do botão inativo */
+    color: #ecf0f1;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 6px 6px 0 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0 2px;
+}
+
+.tab-button:hover {
+    background-color: #4a627a;
+}
+
+.tab-button.active {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+/* Esconde o conteúdo das abas inativas */
+.tab-content {
+    display: none;
+    padding-top: 10px;
+}
+
+/* Mostra o conteúdo da aba ativa */
+.tab-content.active {
+    display: block;
+}
+
+/* --- Estilos para o Acordeão --- */
+.accordion-item {
+    margin-bottom: 8px;
+    border: 1px solid #4a627a;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: #3b5066;
+    color: #ecf0f1;
+    padding: 10px 12px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-header:hover {
+    background-color: #4a627a;
+}
+
+/* Seta para indicar estado do acordeão */
+.accordion-header::after {
+    content: '\25B6'; /* Seta para a direita (triângulo) */
+    font-size: 0.7em;
+    transition: transform 0.3s ease;
+    margin-left: 8px;
+}
+
+.accordion-header.active::after {
+    transform: rotate(90deg); /* Gira a seta quando ativo */
+}
+
+.accordion-content {
+    background-color: #2c3e50;
+    padding: 0 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.accordion-content.active {
+    max-height: 500px; /* Altura máxima para mostrar o conteúdo (ajuste conforme necessário) */
+    padding-bottom: 10px;
+}
+
+/* Grupo de configurações (dentro do acordeão) */
+.setting-group {
+    margin-bottom: 15px;
+    padding-top: 10px;
+}
+.accordion-content .setting-group:last-child {
+    margin-bottom: 0;
+}
+
+.setting-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #bdc3c7;
+    font-size: 0.85em;
+}
+
+/* Estilos para inputs numéricos e de arquivo */
+.setting-group input[type="number"],
+.setting-group input[type="file"],
+.added-element-item input[type="number"], /* Aplicado aos inputs de controle do item adicionado */
+.added-element-item input[type="text"], /* Aplicado aos inputs de controle do item adicionado */
+.added-element-item textarea, /* Aplicado aos textareas de controle do item adicionado */
+.added-element-item input[type="color"] /* Aplicado aos inputs de cor do item adicionado */ {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #4a627a;
+    border-radius: 4px;
+    background-color: #3b5066;
+    color: #ecf0f1;
+    margin-bottom: 3px;
+    box-sizing: border-box;
+    font-size: 0.85em;
+}
+
+/* Estilos específicos para o input de cor */
+.added-element-item input[type="color"] {
+    height: 35px; /* Altura um pouco maior para o seletor de cor */
+    padding: 3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none; /* Remove a borda padrão do input color */
+    border-radius: 4px;
+    background-color: transparent; /* Fundo transparente para mostrar a cor */
+}
+
+/* Estilos para o input de range (slider) */
+.setting-group input[type="range"] {
+    width: calc(100% - 10px); /* Ajuste para o span */
+    -webkit-appearance: none;
+    height: 10px;
+    background: #5a718a;
+    outline: none;
+    opacity: 0.9;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.setting-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.setting-group input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para o valor do border-radius e outros spans de valor */
+.setting-group span {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0.8em;
+    color: #bdc3c7;
+}
+
+/* Estilos para a textarea do editor HTML */
+.html-editor-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #4a627a;
+    border-radius: 4px;
+    background-color: #3b5066;
+    color: #ecf0f1;
+    resize: vertical;
+    font-family: 'Fira Code', 'Cascadia Code', monospace;
+    min-height: 100px;
+    box-sizing: border-box;
+    font-size: 0.85em;
+}
+
+.warning-text {
+    font-size: 0.75em;
+    color: #e74c3c; /* Vermelho para aviso */
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+/* --- Estilos para a nova aba de Blocos HTML --- */
+#tab-blocks h3 {
+    color: #3498db;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.html-blocks-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os blocos quebrem a linha */
+    gap: 10px; /* Espaçamento entre os blocos */
+    justify-content: center; /* Centraliza os blocos */
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4a627a;
+    padding-bottom: 15px;
+}
+
+.draggable-block {
+    background-color: #4a627a;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: grab; /* Indica que é arrastável */
+    font-size: 0.85em;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    flex-basis: calc(50% - 10px); /* Dois blocos por linha, com gap */
+    box-sizing: border-box;
+    user-select: none; /* Impede seleção de texto ao arrastar */
+}
+
+.draggable-block:hover {
+    background-color: #5a718a;
+    transform: translateY(-1px);
+}
+
+.draggable-block:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+}
+
+/* --- Estilos para a Lista de Elementos Adicionados --- */
+#addedElementsList {
+    margin-top: 15px;
+}
+
+#addedElementsList .no-elements-message {
+    color: #bdc3c7;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.added-element-item {
+    background-color: #3b5066;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #4a627a;
+}
+
+.added-element-item h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #3498db;
+    font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.added-element-item .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.added-element-item .controls label {
+    margin-bottom: 0;
+    flex-basis: 100%; /* Labels em sua própria linha */
+    color: #bdc3c7;
+    font-size: 0.8em;
+}
+
+.added-element-item .controls input[type="number"],
+.added-element-item .controls input[type="text"],
+.added-element-item .controls textarea {
+    width: calc(50% - 5px); /* Dois inputs por linha */
+    box-sizing: border-box;
+    font-size: 0.8em;
+    padding: 6px;
+    margin-bottom: 0; /* Remove margem extra */
+}
+.added-element-item .controls textarea {
+    width: 100%; /* Textarea ocupa a largura total */
+    min-height: 50px;
+    resize: vertical;
+}
+
+.added-element-item .controls input[type="file"] {
+    width: 100%; /* Input de arquivo ocupa a largura total */
+}
+
+/* Estilos para os botões de formatação de texto (Negrito/Itálico) */
+.added-element-item .text-format-buttons {
+    display: flex;
+    gap: 5px;
+    width: 100%; /* Ocupa a largura total */
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.added-element-item .text-format-buttons button {
+    background-color: #5a718a;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+.added-element-item .text-format-buttons button.active {
+    background-color: #3498db; /* Azul quando ativo */
+}
+.added-element-item .text-format-buttons button:hover {
+    background-color: #6d849b;
+}
+
+
+.added-element-item .action-buttons {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    justify-content: flex-end;
+}
+
+.added-element-item .action-buttons button {
+    background-color: #e74c3c; /* Vermelho para remover */
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75em;
+    transition: background-color 0.2s;
+}
+.added-element-item .action-buttons button.lock-toggle {
+    background-color: #f1c40f; /* Amarelo para cadeado */
+}
+.added-element-item .action-buttons button.lock-toggle.active {
+    background-color: #2ecc71; /* Verde quando bloqueado */
+}
+
+
+.added-element-item .action-buttons button:hover {
+    opacity: 0.8;
+}
+
+/* --- Estilos para o Local de Drop no Banner --- */
+#editableContainer.drag-over {
+    border: 3px dashed #3498db !important;
+    background-color: rgba(52, 152, 219, 0.1) !important;
+}
+
+/* Estilos para os elementos DENTRO do editableContainer após serem arrastados */
+/* Isso é crucial para o posicionamento absoluto e permitir que sejam arrastáveis novamente */
+#editableContainer > div { /* Aplica-se a divs diretas filhas do editableContainer que serão os blocos */
+    position: absolute;
+    cursor: grab;
+    user-select: none; /* Impede seleção de texto ao arrastar */
+    transition: border 0.1s ease; /* Transição para borda */
+    border: 1px dashed transparent; /* Borda sutil para indicar que é arrastável */
+    box-sizing: border-box; /* Garante que padding/border não afetem o tamanho em pixel */
+}
+
+#editableContainer > div:hover {
+    border-color: rgba(255, 255, 255, 0.5); /* Destaca ao passar o mouse */
+}
+
+#editableContainer > div.locked {
+    cursor: default !important; /* Mudar cursor para 'default' quando bloqueado */
+    border-color: #e74c3c !important; /* Borda vermelha para bloqueado */
+    opacity: 0.8;
+}
+
+
+/* Container para o preview do banner e os botões */
+.banner-preview-container {
+    flex-grow: 1; /* Ocupa todo o espaço restante */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o banner e botões horizontalmente */
+    justify-content: flex-start; /* Alinha o conteúdo no topo */
+    padding: 20px; /* Padding geral para o conteúdo principal */
+    /* Adiciona padding à esquerda para dar espaço ao menu fixo */
+    padding-left: calc(var(--menu-width) + var(--gap));
+    min-height: 100vh; /* Garante que o container ocupe a altura total para centralização vertical */
+    box-sizing: border-box;
+    position: relative; /* Para posicionar o botão do GitHub se ele estivesse dentro deste */
+}
+
+/* Estilos do container editável (o "banner") */
+#editableContainer {
+    background-color: #007bff;
+    border: 1px solid #0056b3;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* Impede scroll interno na exibição normal, mas não na captura */
+    color: #fff;
+    border-radius: 8px;
+    transition: all 0.4s ease-in-out;
+    margin-bottom: 20px; /* Espaço entre o banner e os botões */
+
+    /* Limites máximos visuais para evitar rolagem na tela */
+    /* Min() pega o menor valor entre os argumentos */
+    max-width: Min(1800px, calc(100vw - var(--menu-width) - var(--gap) - (2 * 20px))); /* 2*20px = 40px padding interno do banner */
+    max-height: Min(1800px, calc(100vh - (2 * 20px) - 100px)); /* Subtrai altura aproximada de botões/margens */
+
+    width: auto; /* Permite que a largura se ajuste à max-width */
+    height: auto; /* Permite que a altura se ajuste à max-height */
+}
+
+/* Classe temporária para desativar limites visuais durante a captura */
+#editableContainer.capturing {
+    /* FORÇAR TAMANHO EXATO para captura */
+    width: var(--intended-width-px) !important; /* Será definido via JS custom property */
+    height: var(--intended-height-px) !important; /* Será definido via JS custom property */
+    max-width: none !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    transform: none !important; /* Remover quaisquer transformações */
+    position: absolute !important; /* Pode ajudar a evitar clipping por pais */
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 9999 !important; /* Garantir que está acima para captura */
+    margin: 0 !important;
+    /* Remover padding temporariamente se o padding interno estiver causando clipping da imagem */
+    /* padding: 0 !important; */
+}
+
+/* Grupo de botões */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Estilos base para todos os botões */
+.button-group button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos específicos para o botão "Aplicar Mudanças" */
+#applyChangesBtn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+#applyChangesBtn:hover {
+    background-color: #27ae60;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos específicos para o botão "Gerar Imagem" */
+#captureImageBtn {
+    background-color: #3498db;
+    color: white;
+}
+
+#captureImageBtn:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para a área de pré-visualização da imagem */
+#imagePreview {
+    text-align: center;
+    padding-top: 15px;
+    max-width: 100%; /* Garante que a pré-visualização não transborde */
+    overflow: hidden; /* Esconde overflow da pré-visualização */
+}
+
+#imagePreview img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #5a718a;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+    display: block; /* Garante que não haja espaço extra abaixo da imagem */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#imagePreview a {
+    display: inline-block;
+    background-color: #e67e22;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px; /* Espaço entre o link de download e o botão de fechar */
+}
+
+#imagePreview a:hover {
+    background-color: #d35400;
+    transform: translateY(-1px);
+}
+
+/* Estilos para o botão de fechar/esconder imagem */
+#toggleImagePreviewBtn {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espaço acima do botão */
+}
+
+#toggleImagePreviewBtn:hover {
+    background-color: #c0392b;
+}
+
+/* Estilos para o botão de minimizar imagem */
+#minimizeImagePreviewBtn {
+    background-color: #34495e; /* Cinza azulado */
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espaço acima do botão */
+    margin-left: 10px; /* Espaço à esquerda do botão de esconder */
+}
+
+#minimizeImagePreviewBtn:hover {
+    background-color: #2c3e50;
+}
+
+/* Estilos para o botão do GitHub (AGORA POSIÇÃO FIXA NO VIEWPORT) */
+.github-button {
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1000; /* Garante que fique acima de tudo */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #3498db; /* Cor do link */
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.github-button img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.github-button:hover img {
+    transform: scale(1.1);
+}
+.github-button:hover {
+    color: #2980b9;
+}
+
+
+/* Media queries para responsividade em telas menores */
+@media (max-width: 768px) {
+    .page-container {
+        flex-direction: column; /* Empilha os elementos */
+    }
+
+    .black-menu {
+        position: relative; /* Deixa de ser fixo */
+        width: 100%;
+        height: auto;
+        max-height: 80vh; /* Limita a altura em telas pequenas para evitar que tome toda a tela */
+        border-radius: 0 0 12px 12px; /* Arredonda só em baixo */
+        padding-bottom: 20px; /* Adiciona padding no final para o scroll */
+    }
+
+    .banner-preview-container {
+        padding-left: 20px; /* Remove o padding extra da esquerda */
+        min-height: auto;
+    }
+
+    #editableContainer {
+        /* Ajusta os limites para a largura total da tela menos padding */
+        max-width: Min(1800px, calc(100vw - 40px));
+        /* A altura máxima em telas pequenas pode ser mais flexível, ou um valor fixo se o banner for pequeno */
+        max-height: Min(1800px, calc(100vh - 40px - 200px)); /* Subtrai um espaço para o menu e botões */
+    }
+
+    .draggable-block {
+        flex-basis: calc(100% - 10px); /* Um bloco por linha em telas muito pequenas */
+    }
+
+    .github-button {
+        position: relative; /* Não fixo em telas pequenas */
+        margin-top: 20px;
+        left: 0;
+        bottom: 0;
+        justify-content: center;
+        width: 100%;
+    }
+}

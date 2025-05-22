@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Banner HTML</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <div class="black-menu">
+            <h2>Configurações do Banner</h2>
+
+            <div class="tabs-nav">
+                <button class="tab-button active" data-tab="design">Design</button>
+                <button class="tab-button" data-tab="content">Conteúdo HTML</button>
+                <button class="tab-button" data-tab="blocks">Blocos HTML</button> </div>
+
+            <div id="tab-design" class="tab-content active">
+                <div class="accordion-item">
+                    <button class="accordion-header active">Tamanho do Banner</button>
+                    <div class="accordion-content active">
+                        <div class="setting-group">
+                            <label for="containerWidthNumber">Largura (px):</label>
+                            <input type="number" id="containerWidthNumber" value="400" min="1" max="1800">
+                            <input type="range" id="containerWidthSlider" min="1" max="1800" value="400">
+                            <span id="containerWidthValue">400px</span>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="containerHeightNumber">Altura (px):</label>
+                            <input type="number" id="containerHeightNumber" value="200" min="1" max="1800">
+                            <input type="range" id="containerHeightSlider" min="1" max="1800" value="200">
+                            <span id="containerHeightValue">200px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">Bordas</button>
+                    <div class="accordion-content">
+                        <div class="setting-group">
+                            <label for="borderRadius">Borda Arredondada (px):</label>
+                            <input type="range" id="borderRadius" min="0" max="100" value="0">
+                            <span id="borderRadiusValue">0px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">Fundo (Background)</button>
+                    <div class="accordion-content">
+                        <div class="setting-group">
+                            <label for="backgroundImageUpload">Fundo (Imagem/GIF):</label>
+                            <input type="file" id="backgroundImageUpload" accept="image/*">
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="backgroundPositionXNumber">Posição X do Fundo (%):</label>
+                            <input type="number" id="backgroundPositionXNumber" value="50" min="0" max="100">
+                            <input type="range" id="backgroundPositionXSlider" min="0" max="100" value="50">
+                            <span id="backgroundPositionXValue">50%</span>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="backgroundPositionYNumber">Posição Y do Fundo (%):</label>
+                            <input type="number" id="backgroundPositionYNumber" value="50" min="0" max="100">
+                            <input type="range" id="backgroundPositionYSlider" min="0" max="100" value="50">
+                            <span id="backgroundPositionYValue">50%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+
+            <div id="tab-content" class="tab-content">
+                <div class="setting-group html-editor-group">
+                    <label for="htmlEditor">Editar Conteúdo HTML:</label>
+                    <textarea id="htmlEditor" rows="10" cols="30"></textarea>
+                    <p class="warning-text">
+                        **Atenção:** Editar o HTML aqui pode quebrar o posicionamento exato de elementos arrastados. Use a aba "Blocos HTML" para controle visual.
+                    </p>
+                </div>
+            </div>
+
+            <div id="tab-blocks" class="tab-content">
+                <h3>Arraste e Solte Blocos no Banner</h3>
+                <div class="html-blocks-container">
+                    <div class="draggable-block" draggable="true" data-type="text" data-initial-content="Parágrafo de texto." data-initial-font-size="16" data-initial-color="#FFFFFF">
+                        Parágrafo
+                    </div>
+                    <div class="draggable-block" draggable="true" data-type="heading" data-initial-content="Título" data-initial-font-size="24" data-initial-color="#FFFFFF">
+                        Título (H1)
+                    </div>
+                    <div class="draggable-block" draggable="true" data-type="list" data-initial-content="<li>Item 1</li><li>Item 2</li>" data-initial-font-size="16" data-initial-color="#FFFFFF">
+                        Lista
+                    </div>
+                    <div class="draggable-block" draggable="true" data-type="image" data-initial-src="https://via.placeholder.com/150" data-initial-width="150" data-initial-height="auto">
+                        Imagem
+                    </div>
+                </div>
+                <hr>
+                <h3>Elementos Adicionados</h3>
+                <div id="addedElementsList">
+                    <p class="no-elements-message">Nenhum elemento adicionado ainda.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner-preview-container">
+            <div id="editableContainer" class="blue-rectangle" style="position: relative;">
+            </div>
+            <div class="button-group">
+                <button id="applyChangesBtn">Aplicar Mudanças</button>
+                <button id="captureImageBtn">Gerar Imagem</button>
+            </div>
+            <div id="imagePreview">
+                <button id="toggleImagePreviewBtn" style="display:none;">Esconder Imagem</button>
+                <button id="minimizeImagePreviewBtn" style="display:none;">Minimizar Imagem</button>
+            </div>
+        </div>
+    </div>
+    <a href="https://github.com/GabrielBaiano" target="_blank" class="github-button">
+        <img src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7912097/git-icon-md.png" alt="GitHub" style="height: 32px; width: 32px;">
+    </a>
+    <script src="script.js"></script>
+</body>
+</html>
